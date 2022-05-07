@@ -1,11 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const {
-	randomQuote,
-	authorQuotes,
-	getQuotes,
-	searchQuotes,
-} = require('quotegarden')
-
 const url = 'https://quote-garden.herokuapp.com/api/v3/quotes'
 
 export interface QuoteInterface {

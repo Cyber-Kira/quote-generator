@@ -8,6 +8,14 @@ const {
 
 const url = 'https://quote-garden.herokuapp.com/api/v3/quotes'
 
+export interface QuoteInterface {
+	author?: string
+	genre?: string
+	query?: string
+	page?: number
+	limit?: number
+}
+
 export const fetchRandomQuote = () => {
 	return fetch(`${url}/random`)
 		.then(response => {

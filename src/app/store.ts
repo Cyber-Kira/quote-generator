@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import { quoteSlice } from '../features/quote/quoteSlice'
+import { quotesSlice } from '../features/quotes/quotesSlice'
+import { randomQuoteSlice } from '../features/quote/randomQuoteSlice'
 
 export const store = configureStore({
 	reducer: {
-		quote: quoteSlice.reducer,
+		randomQuote: randomQuoteSlice.reducer,
+		quotes: quotesSlice.reducer,
 	},
 })
 

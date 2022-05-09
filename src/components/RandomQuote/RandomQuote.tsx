@@ -1,22 +1,29 @@
-import React from 'react'
-import { useAppSelector } from '../../app/hooks'
-import { RandomQuoteSkeleton } from '../../lib/components/RandomQuoteSkeleton'
-import { randomColor } from '../../lib/utils'
+import React, { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { getRandomQuote } from '../../features/quote/randomQuoteSlice'
+import { AuthorCard } from '../AuthorCard/AuthorCard'
+import { Quote } from '../Quote/Quote'
+import { AuthorCardWrapper } from './components/AuthorCardWrapper'
+import { RandomQuoteWrapper } from './components/RandomQuoteWrapper'
 
 export const RandomQuote = () => {
-	const { content, isLoading } = useAppSelector(store => store.quote)
-
-	const randomQuoteElement = (
-		<article className='flex gap-8 md:gap-24 max-w-quote'>
-			<div
-				className='h-auto w-2'
-				style={{ backgroundColor: `${randomColor()}` }}
-			/>
-			<p className='w-full font-raleway text-2xl md:text-4xl md:leading-[43px] font-medium'>
-				&quot;{content}&quot;
-			</p>
-		</article>
+	const { content, isLoading, author, genre } = useAppSelector(
+		store => store.randomQuote
 	)
+	const dispatch = useAppDispatch()
 
-	return isLoading ? <RandomQuoteSkeleton /> : randomQuoteElement
+	useEffect(() => {
+		dispatch(getRandomQuote())
+	}, [])
+
+	return (
+		<div className='m-auto w-full'>
+			<RandomQuoteWrapper>
+				<Quote content={content} isLoading={isLoading} />
+			</RandomQuoteWrapper>
+			<AuthorCardWrapper>
+				<AuthorCard isLoading={isLoading} author={author} genre={genre} />
+			</AuthorCardWrapper>
+		</div>
+	)
 }

@@ -1,34 +1,22 @@
-import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from './app/hooks'
-import { AuthorCard } from './components/AuthorCard/AuthorCard'
-import { AuthorCardWrapper } from './components/AuthorCard/components/AuthorCardWrapper'
-import { Header } from './components/Header/Header'
-import { RandomQuoteWrapper } from './components/RandomQuote/components/RandomQuoteWrapper'
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { NotFound } from './components/NotFound/NotFound'
+import { RandomAuthor } from './components/RandomAuthor/RandomAuthor'
 import { RandomQuote } from './components/RandomQuote/RandomQuote'
-import { getRandomQuote } from './features/quote/quoteSlice'
+import { SharedLayout } from './components/SharedLayout/SharedLayout'
 
 const App = () => {
-	const { isLoading, author, genre } = useAppSelector(store => store.quote)
-	const dispatch = useAppDispatch()
-
-	useEffect(() => {
-		dispatch(getRandomQuote())
-	}, [])
-
 	return (
-		<div className='container px-6 mx-auto md:max-w-7xl md:px-0 h-screen'>
-			<Header />
-			<main className='flex h-withHeader'>
-				<div className='my-auto w-full'>
-					<RandomQuoteWrapper>
-						<RandomQuote />
-					</RandomQuoteWrapper>
-					<AuthorCardWrapper>
-						<AuthorCard isLoading={isLoading} author={author} genre={genre} />
-					</AuthorCardWrapper>
-				</div>
-			</main>
-		</div>
+		<Router>
+			<Routes>
+				<Route path='/' element={<SharedLayout />}>
+					<Route index element={<RandomQuote />} />
+					<Route path='/author/:authorId' element={<RandomAuthor />} />
+					<Route path='search' element={<div>Search</div>} />
+				</Route>
+				<Route path='*' element={<NotFound />} />
+			</Routes>
+		</Router>
 	)
 }
 

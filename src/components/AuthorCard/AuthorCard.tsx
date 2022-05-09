@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { AuthorCardSkeleton } from '../../lib/components/AuthorCardSkeleton'
 
 interface Props {
@@ -10,7 +11,10 @@ interface Props {
 export const AuthorCard = ({ isLoading, author, genre }: Props) => {
 	const authorElement = (
 		<article className='w-full max-w-author'>
-			<div className='flex items-center px-8 py-12 hover:bg-[#333333] group transition-colors'>
+			<Link
+				to={`/author/${author}`}
+				className='flex items-center px-8 py-12 hover:bg-[#333333] group transition-colors'
+			>
 				<div>
 					<p className='text-main font-raleway text-2xl leading-7 font-bold group-hover:text-[#F2F2F2]'>
 						{author}
@@ -22,7 +26,7 @@ export const AuthorCard = ({ isLoading, author, genre }: Props) => {
 				<span className='material-symbols-outlined pl-4 invisible text-[#F2F2F2] ml-auto group-hover:visible'>
 					arrow_right_alt
 				</span>
-			</div>
+			</Link>
 		</article>
 	)
 

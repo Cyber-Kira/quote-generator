@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import { Button, TextField } from '@mui/material'
 import React from 'react'
+import { Button, TextField } from '@mui/material'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { getQuotes } from '../../features/quotes/quotesSlice'
 import { Quote } from '../Quote/Quote'
@@ -13,7 +13,6 @@ export const Search = () => {
 	const dispatch = useAppDispatch()
 
 	const handleChange = () => {
-		console.log(1)
 		dispatch(getQuotes({ author, genre, query, limit: Number(20) }))
 	}
 

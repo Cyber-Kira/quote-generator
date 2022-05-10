@@ -1,4 +1,4 @@
-const url = 'https://quote-garden.herokuapp.com/api/v3/quotes'
+const url = 'https://quote-garden.herokuapp.com/api/v3'
 
 export interface RandomQuoteInterface {
 	author?: string
@@ -9,7 +9,7 @@ export interface RandomQuoteInterface {
 }
 
 export const fetchRandomQuote = () => {
-	return fetch(`${url}/random`)
+	return fetch(`${url}/quotes/random`)
 		.then(response => {
 			if (!response.ok) {
 				throw new Error(response.statusText)
@@ -39,6 +39,16 @@ export interface QuotesInterface {
 	isLoading: boolean
 }
 
+export interface AuthorsInterface {
+	data: string[]
+	isLoading: boolean
+}
+
+export interface GenresInterface {
+	data: string[]
+	isLoading: boolean
+}
+
 export const fetchQuotes = ({
 	author = '',
 	genre = '',
@@ -53,7 +63,7 @@ export const fetchQuotes = ({
 		page: String(page),
 		limit: String(limit),
 	})
-	return fetch(`${url}?${params}`)
+	return fetch(`${url}/quotes?${params}`)
 		.then(response => {
 			if (!response.ok) {
 				throw new Error(response.statusText)
@@ -63,8 +73,24 @@ export const fetchQuotes = ({
 		.catch(err => err)
 }
 
-const f = async () => {
-	console.log(await fetchQuotes({ query: 'life' }))
+export const fetchAuthors = (): Promise<AuthorsInterface> => {
+	return fetch(`${url}/authors`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(response.statusText)
+			}
+			return response.json()
+		})
+		.catch(err => err)
 }
 
-f()
+export const fetchGenres = (): Promise<GenresInterface> => {
+	return fetch(`${url}/genres`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(response.statusText)
+			}
+			return response.json()
+		})
+		.catch(err => err)
+}

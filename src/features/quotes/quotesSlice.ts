@@ -15,10 +15,9 @@ const initialState: QuotesInterface = {
 }
 
 export const getQuotes = createAsyncThunk(
-	'counter/getQuotes',
+	'quotes/getQuotes',
 	async ({ author, genre, query, page, limit }: RandomQuoteInterface) => {
 		const response = await fetchQuotes({ author, genre, query, page, limit })
-		// The value we return becomes the `fulfilled` action payload
 		return response
 	}
 )

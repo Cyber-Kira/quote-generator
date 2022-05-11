@@ -22,11 +22,15 @@ export const Authors = () => {
 	}, [open])
 
 	const handleChange = (inputValue: string | null) => {
-		dispatch(setAuthor(inputValue))
+		if (inputValue === null) {
+			dispatch(setAuthor([]))
+		} else {
+			dispatch(setAuthor(inputValue))
+		}
 	}
 
 	return (
-		<div className='flex flex-col gap-4 max-w-quote mx-auto w-full mt-5 bg-slate-100'>
+		<div className='flex flex-col max-w-quote mx-auto w-full bg-slate-100'>
 			<Autocomplete
 				id='authors'
 				disableListWrap
@@ -44,7 +48,7 @@ export const Authors = () => {
 				renderInput={params => (
 					<TextField
 						{...params}
-						label='Authors'
+						label='Author'
 						InputProps={{
 							...params.InputProps,
 							endAdornment: (

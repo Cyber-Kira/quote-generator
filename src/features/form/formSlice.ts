@@ -27,7 +27,10 @@ export const formSlice = createSlice({
 		setQuery: (state, { payload }) => {
 			state.query = payload
 		},
+		clearQuery: (state, { payload }) => {
+			state.query = ''
+		},
 	},
 })
 
-export const { setAuthor, setGenre, setQuery } = formSlice.actions
+export const { setAuthor, setGenre, setQuery, clearQuery } = formSlice.actions

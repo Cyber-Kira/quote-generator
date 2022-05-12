@@ -13,7 +13,11 @@ export const Search = () => {
 	const { genre, author, query } = useAppSelector(store => store.form)
 	const dispatch = useAppDispatch()
 
-	const handleChange = (value?: number) => {
+	const handleChange = (
+		event: React.FormEvent<HTMLFormElement> | React.ChangeEvent<unknown>,
+		value?: number
+	) => {
+		event.preventDefault()
 		if (value) {
 			dispatch(
 				getQuotes({ author, genre, query, page: value, limit: Number(20) })
@@ -25,27 +29,20 @@ export const Search = () => {
 
 	useEffect(() => {
 		dispatch(getQuotes({ author: '', genre: '', query: '', limit: Number(20) }))
-		const listener = (event: KeyboardEvent) => {
-			if (event.code === 'Enter' || event.code === 'NumpadEnter') {
-				event.preventDefault()
-				dispatch(getQuotes({ author, genre, query, limit: Number(20) }))
-			}
-		}
-		document.addEventListener('keydown', listener)
-		return () => {
-			document.removeEventListener('keydown', listener)
-		}
 	}, [])
 
 	return (
 		<div className='flex flex-col max-w-quote mx-auto w-full mt-5'>
-			<form className='flex flex-col md:flex-row gap-4 w-full'>
+			<form
+				className='flex flex-col md:flex-row gap-4 w-full'
+				onSubmit={handleChange}
+			>
 				<Query />
 				<Authors />
 				<Genres />
 				<Button
+					type='submit'
 					className='flex-shrink-0'
-					onClick={() => handleChange()}
 					disableElevation
 					variant='contained'
 					endIcon={<span className='material-symbols-outlined'>search</span>}
@@ -59,7 +56,7 @@ export const Search = () => {
 					color='primary'
 					count={pagination.totalPages}
 					page={pagination.currentPage}
-					onChange={(_event, value) => handleChange(value)}
+					onChange={(_event, value) => handleChange(_event, value)}
 				/>
 			</div>
 			<Quotes />

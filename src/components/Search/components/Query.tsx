@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { TextField } from '@mui/material'
+import { IconButton, TextField } from '@mui/material'
 import React from 'react'
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 import { setQuery } from '../../../features/form/formSlice'
@@ -20,7 +20,7 @@ export const Query = () => {
 		) : null
 
 	return (
-		<div className='flex flex-col max-w-quote mx-auto w-full bg-slate-100'>
+		<div className='flex flex-col max-w-quote mx-auto w-full'>
 			<TextField
 				value={query}
 				onChange={handleChange()}

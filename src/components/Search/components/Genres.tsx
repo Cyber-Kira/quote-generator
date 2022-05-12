@@ -27,7 +27,7 @@ export const Genres = () => {
 	}
 
 	return (
-		<div className='flex flex-col max-w-quote mx-auto w-full bg-slate-100'>
+		<div className='flex flex-col max-w-quote mx-auto w-full '>
 			<Autocomplete
 				id='genres'
 				disableListWrap

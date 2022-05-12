@@ -17,7 +17,7 @@ export const RandomQuote = () => {
 	}, [])
 
 	return (
-		<div className='m-auto w-full'>
+		<div className='m-auto w-full h-withHeader flex flex-col justify-center'>
 			<RandomQuoteWrapper>
 				<Quote content={content} isLoading={isLoading} />
 			</RandomQuoteWrapper>

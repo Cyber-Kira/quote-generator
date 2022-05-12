@@ -1,3 +1,8 @@
+// There is a better way of rendering 11000+ authors into the field.
+// I may change it in the future
+
+// TODO: change render method to virtualization with react-window
+
 /* eslint-disable react/jsx-props-no-spreading */
 import { Autocomplete, CircularProgress, TextField } from '@mui/material'
 import React, { useEffect } from 'react'
@@ -30,7 +35,7 @@ export const Authors = () => {
 	}
 
 	return (
-		<div className='flex flex-col max-w-quote mx-auto w-full bg-slate-100'>
+		<div className='flex flex-col max-w-quote mx-auto w-full'>
 			<Autocomplete
 				id='authors'
 				disableListWrap

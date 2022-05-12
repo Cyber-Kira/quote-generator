@@ -12,6 +12,13 @@ export const Query = () => {
 		dispatch(setQuery(event.target.value))
 	}
 
+	const inputProps =
+		query !== undefined && query.length > 0 ? (
+			<IconButton onClick={() => dispatch(setQuery(''))} aria-label='clear'>
+				<span className='material-symbols-outlined'>close</span>
+			</IconButton>
+		) : null
+
 	return (
 		<div className='flex flex-col max-w-quote mx-auto w-full bg-slate-100'>
 			<TextField
@@ -19,6 +26,10 @@ export const Query = () => {
 				onChange={handleChange()}
 				id='query-string'
 				label='Query'
+				variant='outlined'
+				InputProps={{
+					endAdornment: inputProps,
+				}}
 			/>
 		</div>
 	)
